@@ -1,4 +1,4 @@
-# tmux-awesome-vim-setup
+# tmux-awesome-tmux-setup
 
 ### Installation:
 
