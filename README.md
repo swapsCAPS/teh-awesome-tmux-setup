@@ -1,4 +1,4 @@
-# tmux-awesome-tmux-setup
+# teh-awesome-tmux-setup
 
 ### Installation:
 
