@@ -1,1 +1,0 @@
-/home/stofstik/teh-awesome-tmux-setup/.tmux
