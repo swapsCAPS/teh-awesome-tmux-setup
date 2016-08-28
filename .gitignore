@@ -1,3 +1,4 @@
 *.swp
 *.swo
 .tmux/plugins/
+.tmux/sidebar/
