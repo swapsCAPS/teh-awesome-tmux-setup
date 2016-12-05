@@ -1,0 +1,14 @@
+[Unit]
+Description=Detached tmux session
+After=network.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+User=pi
+ExecStart=/usr/bin/tmux new-session -d -s %I
+ExecStop=/usr/bin/tmux kill-server
+KillMode=none
+
+[Install]
+WantedBy=multi-user.target
