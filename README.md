@@ -15,3 +15,4 @@
 - ```Modify tmux@.service for your username and tmux location```
 - ```sudo cp tmux@.service /lib/systemd/system/```
 - ```sudo systemctl enable tmux@login-session.service```
+- ```tmux will now run at next boot with session name 'login-session'```
