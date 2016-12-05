@@ -10,3 +10,8 @@
 - ```ln -s ~/teh-awesome-tmux-setup/.tmux.conf ~/.tmux.conf```
 - ```tmux source ~/.tmux.conf```
 - ```Press prefix + I (Capital I as in Install) to load the plugins in ~/.tmux.conf```
+
+### Start session after boot (handy when running headless)
+- ```Modify tmux@.service for your username and tmux location```
+- ```sudo cp tmux@.service /lib/systemd/system/```
+- ```sudo systemctl enable tmux@login-session.service```
