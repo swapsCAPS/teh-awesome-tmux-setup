@@ -1,0 +1,137 @@
+# My own shortcuts
+bind-key S setw synchronize-panes
+
+# Set window split, ensure window is same path as current split
+bind-key v split-window -h -c '#{pane_current_path}'
+bind-key b split-window -c '#{pane_current_path}'
+bind-key c new-window -c '#{pane_current_path}'
+
+# Activate mouse mode
+<<<<<<< 1fca9d65971aec691e9e104f545a936143d275a8
+# set -g mouse on
+=======
+set -g mouse on
+
+# Enable clipboard on Ubuntu
+bind -Tcopy-mode-vi y send -X copy-pipe "xclip -i -sel p -f | xclip -i -sel c" \; display-message "copied to system clipboard"
+>>>>>>> fix copying
+
+# set -g @colors-solarized 'dark'
+# set -g @themepack 'block/blue'
+# set -g @themepack 'block/cyan'
+# set -g @themepack 'block/gray'
+# set -g @themepack 'block/green'
+# set -g @themepack 'block/magenta'
+# set -g @themepack 'block/orange'
+# set -g @themepack 'block/red'
+# set -g @themepack 'block/yellow'
+
+# Enable Ctrl-Left Ctrl-Right to navigate words
+set-window-option -g xterm-keys on
+
+# Don't rename windows automatically
+set-option -g allow-rename off
+
+# Smart pane switching with awareness of vim splits
+# See: https://github.com/christoomey/vim-tmux-navigator
+is_vim='echo "#{pane_current_command}" | grep -iqE "(^|\/)g?(view|n?vim?x?)(diff)?$"'
+bind -n C-h if-shell "$is_vim" "send-keys C-h" "select-pane -L"
+bind -n C-j if-shell "$is_vim" "send-keys C-j" "select-pane -D"
+bind -n C-k if-shell "$is_vim" "send-keys C-k" "select-pane -U"
+bind -n C-l if-shell "$is_vim" "send-keys C-l" "select-pane -R"
+bind -n C-\ if-shell "$is_vim" "send-keys C-\\" "select-pane -l"
+
+# C-b is not acceptable -- Vim uses it
+set-option -g prefix C-a
+bind-key C-a last-window
+
+# Start numbering at 1
+set -g base-index 1
+set -g pane-base-index 1
+
+# Allows for faster key repetition
+set -sg escape-time 0
+
+# Rather than constraining window size to the maximum size of any client
+# connected to the *session*, constrain window size to the maximum size of any
+# client connected to *that window*. Much more reasonable.
+setw -g aggressive-resize on
+
+# Allows us to use C-a a <command> to send commands to a TMUX session inside
+# another TMUX session
+bind-key a send-prefix
+
+# Activity monitoring
+setw -g monitor-activity on
+set -g visual-activity on
+
+# Enable clipboard on Ubuntu
+# bind -T copy-mode-vi y send -X copy-pipe "xclip -sel clip -i"
+
+
+# Vi copypaste mode
+set-window-option -g mode-keys vi
+bind-key -T copy-mode-vi v   send-keys -X begin-selection
+bind-key -T copy-mode-vi C-v send-keys -X rectangle-toggle
+bind-key -T copy-mode-vi y   send-keys -X copy-selection
+# unbind-key -T copy-mode-vi v
+
+# hjkl pane traversal
+bind h select-pane -L
+bind j select-pane -D
+bind k select-pane -U
+bind l select-pane -R
+
+set -g default-terminal screen-256color
+
+# set to main-horizontal, 60% height for main pane
+bind m set-window-option main-pane-height 60\; select-layout main-horizontal
+
+bind-key C command-prompt -p "Name of new window: " "new-window -n '%%'"
+
+# Source Tmuxline config
+source-file ~/teh-awesome-tmux-setup/.tmuxline-snapshot
+
+# reload config
+bind r source-file ~/.tmux.conf \; display-message "Config reloaded..."
+
+# auto window rename
+set-window-option -g automatic-rename
+
+# https://github.com/edkolev/dots/blob/master/tmux.conf
+# Updates for tmux 1.9's current pane splitting paths.
+
+# from powerline
+# run-shell "tmux set-environment -g TMUX_VERSION_MAJOR $(tmux -V | cut -d' ' -f2 | cut -d'.' -f1 | sed 's/[^0-9]*//g')"
+# run-shell "tmux set-environment -g TMUX_VERSION_MINOR $(tmux -V | cut -d' ' -f2 | cut -d'.' -f2 | sed 's/[^0-9]*//g')"
+
+# status bar
+if-shell '\( #{$TMUX_VERSION_MAJOR} -eq 2 -a #{$TMUX_VERSION_MINOR} -lt 2\) -o #{$TMUX_VERSION_MAJOR} -le 1' 'set-option -g status-utf8 on'
+
+# rm mouse mode fail
+# if-shell '\( #{$TMUX_VERSION_MAJOR} -eq 2 -a #{$TMUX_VERSION_MINOR} -ge 1\) -o #{$TMUX_VERSION_MAJOR} -gt 2' 'set -g mouse off'
+# if-shell '\( #{$TMUX_VERSION_MAJOR} -eq 2 -a #{$TMUX_VERSION_MINOR} -lt 1\) -o #{$TMUX_VERSION_MAJOR} -le 1' 'set -g mode-mouse off'
+
+# fix pane_current_path on new window and splits
+if-shell "#{$TMUX_VERSION_MAJOR} -gt 1 -o \( #{$TMUX_VERSION_MAJOR} -eq 1 -a #{$TMUX_VERSION_MINOR} -ge 8 \)" 'unbind c; bind c new-window -c "#{pane_current_path}"'
+if-shell "#{$TMUX_VERSION_MAJOR} -gt 1 -o \( #{$TMUX_VERSION_MAJOR} -eq 1 -a #{$TMUX_VERSION_MINOR} -ge 8 \)" "unbind '\"'; bind '\"' split-window -v -c '#{pane_current_path}'"
+if-shell "#{$TMUX_VERSION_MAJOR} -gt 1 -o \( #{$TMUX_VERSION_MAJOR} -eq 1 -a #{$TMUX_VERSION_MINOR} -ge 8 \)" 'unbind v; bind v split-window -h -c "#{pane_current_path}"'
+if-shell "#{$TMUX_VERSION_MAJOR} -gt 1 -o \( #{$TMUX_VERSION_MAJOR} -eq 1 -a #{$TMUX_VERSION_MINOR} -ge 8 \)" 'unbind %; bind % split-window -h -c "#{pane_current_path}"'
+
+# List of plugins
+set -g @plugin 'tmux-plugins/tpm'
+# set -g @plugin 'tmux-plugins/tmux-sensible'
+set -g @plugin 'tmux-plugins/tmux-yank'
+# set -g @plugin 'jimeh/tmux-themepack'
+# set -g @plugin 'tmux-plugins/tmux-cpu'
+# set -g status-right "CPU: #{cpu_icon} #{cpu_percentage} | %a %h-%d %H:%M "
+# set -g @plugin 'seebi/tmux-colors-solarized'
+# set -g @plugin 'tmux-plugins/tmux-sidebar'
+
+# Other examples:
+# set -g @plugin 'github_username/plugin_name'
+# set -g @plugin 'git@github.com/user/plugin'
+# set -g @plugin 'git@bitbucket.com/user/plugin'
+
+# Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
+run '~/.tmux/plugins/tpm/tpm'
