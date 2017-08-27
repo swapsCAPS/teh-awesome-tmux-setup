@@ -3,7 +3,7 @@
 ### Installation:
 
 - ```mkdir ~/src```
-- ```git clone https://github.com/stofstik/teh-awesome-tmux-setup.git ~/src/teh-awesome-tmux-setup```
+- ```git clone https://github.com/swapsCAPS/teh-awesome-tmux-setup.git ~/src/teh-awesome-tmux-setup```
 - ```cd ~/src/teh-awesome-tmux-setup```
 - ```git submodule init```
 - ```git submodule update```
