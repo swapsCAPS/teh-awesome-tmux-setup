@@ -42,7 +42,7 @@ set-option -g status-right-length "80"
 set-window-option -g window-status-separator ""
 
 set-option -g status-left "#[fg=colour248, bg=colour241] #S #[fg=colour241, bg=colour237, nobold, noitalics, nounderscore]"
-set-option -g status-right "#[fg=colour239, bg=colour237, nobold, nounderscore, noitalics]#[fg=colour246,bg=colour239] bat: #(~/bin/status-command-rs 10) | cpu: #{cpu_percentage}#[fg=colour246,bg=colour239] #[fg=colour248, bg=colour239, nobold, noitalics, nounderscore]#[fg=colour237, bg=colour248] #h  "
+set-option -g status-right "#[fg=colour239, bg=colour237, nobold, nounderscore, noitalics]#[fg=colour246,bg=colour239] bat: #(~/bin/status-command-rs 10) | cpu: #{cpu_percentage}#[fg=colour246,bg=colour239] #[fg=colour248, bg=colour239, nobold, noitalics, nounderscore]#[fg=colour237, bg=colour248] #h ⚙️ "
 
 set-window-option -g window-status-current-format "#[fg=colour237, bg=yellow, nobold, noitalics, nounderscore]#[fg=colour239, bg=yellow] #I #[fg=colour239, bg=yellow, bold] #W #[fg=yellow, bg=colour237, nobold, noitalics, nounderscore]"
 set-window-option -g window-status-format "#[fg=colour237,bg=colour239,noitalics]#[fg=colour223,bg=colour239] #I #[fg=colour223, bg=colour239] #W #[fg=colour239, bg=colour237, noitalics]"
