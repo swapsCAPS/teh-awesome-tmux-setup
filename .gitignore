@@ -2,3 +2,4 @@
 *.swo
 .tmux/plugins/
 .tmux/sidebar/
+.DS_Store
